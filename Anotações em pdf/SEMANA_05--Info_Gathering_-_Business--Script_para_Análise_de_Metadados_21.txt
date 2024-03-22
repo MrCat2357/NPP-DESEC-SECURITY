@@ -1,0 +1,52 @@
+### Script para Análise de Metadados
++ Instalação do lynx
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo apt-get update
+sudo apt-get -y install lynx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
++ Forma de uso:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lynx --dump terra.com.br
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
++ Para fazer pesquisa no Google:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lynx google.com
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ou
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lynx --dump "https://google.com/search?&q=site:desecsecurity.com+ext:pdf" | grep ".pdf"
+| cut -d "=" -f2 | egrep -v "site|google" | sed 's/...$//' > desec
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+OBS: ‘s/...$//’ substitui os 3 últimos caracteres por nada
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for url in $(cat desec); do wget -q $url; done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
++ Para fazer a análise dos metadados:
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+exiftool *.pdf
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
++ Lembra que o google pode nos bloquear caso façamos muitas pesquisas recorrentes ⇒ devo usar com moderação
+
+
